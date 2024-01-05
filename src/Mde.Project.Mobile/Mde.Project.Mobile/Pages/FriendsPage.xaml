@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Mde.Project.Mobile.Domain.Models"
+             xmlns:icons="clr-namespace:Mde.Project.Mobile.Domain.Helpers"
+             x:Class="Mde.Project.Mobile.Pages.FriendsPage"
+             x:Name="page"
+             Title="Social"
+             Style="{StaticResource MainLayout}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" 
+                     Command="{Binding AddFriendCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                 Glyph="{x:Static icons:FontAwesomeHelper.UserPlus}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>        
+            <StackLayout>        
+                <SearchBar Text="{Binding Search}"
+                           Margin="0,0,20,0"
+                           TextColor="White"/>
+                <ScrollView >
+                    <ListView ItemsSource="{Binding Friends}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:UserModel">
+                                <TextCell Text="{Binding Name}"
+                                            TextColor="{StaticResource ColorPrimary}">
+                                    <TextCell.ContextActions>                           
+                                        <MenuItem Text="Delete"                                      
+                                                    Command="{Binding BindingContext.DeleteFriendCommand,Source={x:Reference page}}"
+                                                    CommandParameter="{Binding .}">
+                                            <MenuItem.IconImageSource>
+                                                <FontImageSource   FontFamily="{StaticResource FontAwesomeSolid}"
+                                                                    Glyph="{x:Static icons:FontAwesomeHelper.Trash}"
+                                                                    Size="20">
+                                                </FontImageSource>
+                                            </MenuItem.IconImageSource>
+                                        </MenuItem>                        
+                                    </TextCell.ContextActions>                         
+                        
+                                </TextCell>
+                        
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
+
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <FlexLayout Grid.Column="0"
+                                    AlignItems="Center" 
+                                    JustifyContent="Center"
+                                    Direction="Column"
+                                    BackgroundColor="{Binding FriendsIsActive,Converter={StaticResource TabIsActiveConverter}}">
+                        <Label TextColor="White"                               
+                                   FontFamily="{StaticResource FontAwesomeSolid}"
+                                   Text="{x:Static icons:FontAwesomeHelper.Users}"
+                                   FontSize="15"/>
+                        <Label Text="Friends"
+                                   FontSize="12"
+                                  TextColor="white"/>
+                    </FlexLayout>
+                    <FlexLayout Grid.Column="1"
+                                AlignItems="Center" 
+                                JustifyContent="Center"
+                                Direction="Column"
+                                BackgroundColor="{Binding FriendsRequestIsActive,Converter={StaticResource TabIsActiveConverter}}">
+                        <Label TextColor="white"      
+                               FontFamily="{StaticResource FontAwesomeSolid}"
+                               Text="{x:Static icons:FontAwesomeHelper.UserCheck}"
+                               FontSize="15"/>
+                        <Label Text="Friend Requests"
+                                FontSize="12"
+                                TextColor="white"></Label>
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToFriendRequestCommand}"></TapGestureRecognizer>
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+
+            </Grid>
+        </StackLayout>        
+    </ContentPage.Content>
+</ContentPage>

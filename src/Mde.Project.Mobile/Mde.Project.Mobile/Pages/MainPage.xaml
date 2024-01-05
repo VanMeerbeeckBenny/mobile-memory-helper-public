@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:model="clr-namespace:Mde.Project.Mobile.Domain.Models"
+             xmlns:icons="clr-namespace:Mde.Project.Mobile.Domain.Helpers"
+             x:Class="Mde.Project.Mobile.Pages.MainPage"
+             x:Name="page"
+             Style="{StaticResource MainLayout}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" 
+                     Command="{Binding OpenCreateCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                 Glyph="{x:Static icons:FontAwesomeHelper.Plus}"/>
+
+            </ToolbarItem.IconImageSource>
+       </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="0,20,0,0">
+            <Label Style="{StaticResource LabelEntry}"
+                   Text="MemoryHelper"
+                   HorizontalOptions="Center"                 
+                   CharacterSpacing="2"
+                   FontSize="25">               
+            </Label>
+            <Image Aspect="AspectFit"                   
+                   HorizontalOptions="Center">
+                <Image.Source>
+                    <OnPlatform x:TypeArguments="FileImageSource">
+                        <On Platform="Android">MemoryHelper.png</On>
+                        <On Platform="UWP">Images/MemoryHelper.png</On>
+                    </OnPlatform>
+                </Image.Source>
+            </Image>                      
+                <ListView ItemsSource="{Binding Lists}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:ListModel">
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Share"                                      
+                                                Command="{Binding BindingContext.ShareListCommand,Source={x:Reference page}}"
+                                                CommandParameter="{Binding .}">
+                                        <MenuItem.IconImageSource>
+                                            <FontImageSource   FontFamily="{StaticResource FontAwesomeSolid}"
+                                                                Glyph="{x:Static icons:FontAwesomeHelper.Share}"
+                                                                Size="20">
+                                            </FontImageSource>
+                                        </MenuItem.IconImageSource>
+
+                                    </MenuItem>
+                                    <MenuItem Text="Delete"                                      
+                                                Command="{Binding BindingContext.DeleteListCommand,Source={x:Reference page}}"
+                                                CommandParameter="{Binding .}">
+                                        <MenuItem.IconImageSource>
+                                            <FontImageSource   FontFamily="{StaticResource FontAwesomeSolid}"
+                                                                Glyph="{x:Static icons:FontAwesomeHelper.Trash}"
+                                                                Size="20">                                        
+                                            </FontImageSource>
+                                        </MenuItem.IconImageSource>
+                                
+                                    </MenuItem>
+                                    <MenuItem Text="Update"
+                                                Command="{Binding BindingContext.OpenEditCommand,Source={x:Reference page}}"
+                                                CommandParameter="{Binding .}">
+                                        <MenuItem.IconImageSource>
+                                            <FontImageSource   FontFamily="{StaticResource FontAwesomeSolid}"
+                                                                Glyph="{x:Static icons:FontAwesomeHelper.Pen}"
+                                                                Size="20">
+
+                                            </FontImageSource>
+                                        </MenuItem.IconImageSource>
+                                    </MenuItem>
+                                </ViewCell.ContextActions>
+                                <StackLayout Orientation="Horizontal" >
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.NavigateToSelectListCommand,Source={x:Reference page}}"
+                                            CommandParameter="{Binding .}">
+                                            <TapGestureRecognizer.NumberOfTapsRequired>
+                                                <OnPlatform x:TypeArguments="x:Int32">
+                                                    <On Platform="UWP" Value="1"></On>
+                                                    <On Platform="Android,iOS" Value="2"></On>
+                                                </OnPlatform>
+                                            </TapGestureRecognizer.NumberOfTapsRequired>
+                                        </TapGestureRecognizer>                                
+                                    </StackLayout.GestureRecognizers>
+                                    <Label FontFamily="{StaticResource FontAwesomeSolid}"
+                                            Text="{x:Static icons:FontAwesomeHelper.List}"
+                                            Style="{StaticResource LabelEntry}"
+                                            VerticalOptions="Center"
+                                            Padding="10,0"
+                                            ></Label>
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{StaticResource ColorPrimary}"
+                                           VerticalOptions="Center"></Label>
+                                </StackLayout>    
+                
+                                </ViewCell>                  
+                            </DataTemplate>                
+                     </ListView.ItemTemplate>
+                </ListView>            
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

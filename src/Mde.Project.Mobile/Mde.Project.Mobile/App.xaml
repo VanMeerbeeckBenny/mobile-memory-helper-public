@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:conv="clr-namespace:Mde.Project.Mobile.Converters"
+             x:Class="Mde.Project.Mobile.App">
+    <Application.Resources>
+        <conv:FriendsActiveTabConverter x:Key="TabIsActiveConverter" />
+
+        <OnPlatform x:Key="FontAwesomeRegular" x:TypeArguments="x:String">
+            <On Platform="Android" Value="FontAwesomeRegular.otf#Font Awesome 6 Free Regular"/>
+            <On Platform="UWP" Value="/Assets/Fonts/FontAwesomeRegular.otf#Font Awesome 6 Free Regular"/>
+        </OnPlatform>
+        <OnPlatform x:Key="FontAwesomeSolid" x:TypeArguments="x:String">
+            <On Platform="Android" Value="FontAwesomeSolid.otf#Font Awesome 6 Free Solid"/>
+            <On Platform="UWP" Value="/Assets/Fonts/FontAwesomeSolid.otf#Font Awesome 6 Free Solid"/>
+        </OnPlatform>
+        <OnPlatform x:Key="DefaultThickness" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0"></On>
+            <On Platform="Android" Value="0"></On>
+            <On Platform="UWP" Value="20"></On>
+        </OnPlatform>     
+
+        <Color x:Key="ColorPrimary">#76b5c5</Color>
+        <Color x:Key="ColorUpdate">#ffbd03</Color>
+        <Color x:Key="ColorDelete">#d85757</Color>
+        <Color x:Key="ColorSave">#80BD72</Color>
+        <Color x:Key="ColorBackground">#363c3f</Color>
+        <Color x:Key="ColorEntry">white</Color>
+        <!--Styles-->
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{StaticResource ColorPrimary}" />
+            <Setter Property="BarTextColor" Value="White" />
+        </Style>
+
+        <Style x:Key="MainLayout" TargetType="ContentPage">
+            <Setter Property="Padding" Value="{StaticResource DefaultThickness}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorBackground}"/>
+        </Style>
+        <Style x:Key="FontSing" TargetType="Label">
+            <Setter Property="FontFamily">
+                <OnPlatform x:TypeArguments="x:String">
+                    <On Platform="Android" Value="Comic Book.otf#Comic Book"></On>
+                    <On Platform="UWP" Value="/Assets/Fonts/Comic Book.otf#Comic Book"></On>
+                </OnPlatform>
+            </Setter>
+        </Style>
+        <Style x:Key="LabelEntry" TargetType="Label" BasedOn="{StaticResource FontSing}">
+            <Setter Property="TextColor" Value="{StaticResource ColorPrimary}"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
+        <Style x:Key="LabelError" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ColorDelete}"/>
+            <Setter Property="FontSize" Value="12"></Setter>           
+        </Style>
+        <Style x:Key="EntryStandard" TargetType="Entry">
+            <Setter Property="TextColor">
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="Android" Value="{StaticResource ColorEntry}"/>
+                    <On Platform="UWP" Value="{StaticResource ColorEntry}"/>
+                </OnPlatform>
+            </Setter>
+        </Style>
+        <!--Buttons styling-->
+      
+
+        <Style x:Key="EditorStandard" TargetType="Editor">
+            <Setter Property="TextColor">
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="Android" Value="{StaticResource ColorEntry}"/>
+                    <On Platform="UWP" Value="{StaticResource ColorEntry}"/>
+                </OnPlatform>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="BaseButton" TargetType="Button">
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+        
+        <Style x:Key="ButtonPrimary" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorPrimary}"/>
+        </Style>
+        
+        <Style x:Key="ButtonUpdate" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorUpdate}"/>
+        </Style>
+        
+        <Style x:Key="ButtonDelete" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorDelete}"/>
+            <Setter Property="FontSize" Value="10"></Setter>
+        </Style>
+        
+        <Style x:Key="ButtonSave" TargetType="Button" BasedOn="{StaticResource BaseButton}">
+            <Setter Property="BackgroundColor" Value="{StaticResource ColorSave}"/>
+            <Setter Property="FontSize" Value="10"></Setter>
+        </Style>
+    </Application.Resources>
+</Application>

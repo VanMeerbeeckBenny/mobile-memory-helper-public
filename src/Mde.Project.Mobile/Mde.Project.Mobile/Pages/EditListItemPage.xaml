@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mde.Project.Mobile.Pages.EditListItemPage"
+             xmlns:icons ="clr-namespace:Mde.Project.Mobile.Domain.Helpers"
+             Title="{Binding PageTitle}"
+             Style="{StaticResource MainLayout}">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Padding="10,10">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               Color="{StaticResource ColorPrimary}"
+                               VerticalOptions="CenterAndExpand"></ActivityIndicator>
+            <StackLayout IsVisible="{Binding ShowContent}">
+                <StackLayout>
+                    <Label Text="Name:"
+                        Style="{StaticResource LabelEntry}"></Label>
+                    <Entry Text="{Binding Name}"
+                            Style="{StaticResource EntryStandard}"></Entry>
+                    <Label Style="{StaticResource LabelError}"
+                        Text="{Binding NameError}"
+                        IsVisible="{Binding NameErrorVisible}"/>
+                    </StackLayout>
+                <StackLayout>
+                    <Label Text="Description: "
+                        Style="{StaticResource LabelEntry}"></Label>
+                    <Editor Text="{Binding Description}"
+                            Style="{StaticResource EditorStandard}"></Editor>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Picture: "
+                            Padding="0,30,0,0"
+                            Style="{StaticResource LabelEntry}"></Label>
+                    <Image Source="{Binding Image}" 
+                            Aspect="AspectFill"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="600"></Image>
+
+                    <FlexLayout Direction="Row" JustifyContent="SpaceBetween">
+                        <Frame BorderColor="{StaticResource ColorPrimary}"
+                            BackgroundColor="Transparent"
+                            WidthRequest="155"
+                            HorizontalOptions="Center"
+                            Padding="5">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OnTakePictureCommand}">
+
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                            <FlexLayout JustifyContent="Center" Direction="Row">
+                                <Label Text="Take picture"
+                                        Margin="0,0,5,0"
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource LabelEntry}"/>
+                                <Label
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource LabelEntry}"
+                                        FontSize="25"
+                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                        Text="{x:Static icons:FontAwesomeHelper.Camera}"/>
+                            </FlexLayout>
+                        </Frame>
+                        <Frame BorderColor="{StaticResource ColorPrimary}"
+                            BackgroundColor="Transparent"
+                            WidthRequest="155"
+                            HorizontalOptions="Center"
+                            Padding="5">
+                        <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OnSelectPictureCommand}">
+
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                            <FlexLayout JustifyContent="Center" Direction="Row">
+                                <Label Text="Select picture"
+                                        Margin="0,0,5,0"
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource LabelEntry}"/>
+                                <Label
+                                        HorizontalOptions="Center"
+                                        Style="{StaticResource LabelEntry}"
+                                        FontSize="25"
+                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                        Text="{x:Static icons:FontAwesomeHelper.File}"/>
+                            </FlexLayout>
+                        </Frame>
+                    </FlexLayout>
+
+                </StackLayout>
+                <Button Style="{StaticResource ButtonSave}"                    
+                        Text="Save"
+                        Command="{Binding OnSaveCommand}">
+
+                </Button>
+            </StackLayout>
+
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

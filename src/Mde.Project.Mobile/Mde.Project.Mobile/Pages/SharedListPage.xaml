@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Mde.Project.Mobile.Domain.Models"
+             xmlns:toolkit ="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:icons="clr-namespace:Mde.Project.Mobile.Domain.Helpers"
+             x:Class="Mde.Project.Mobile.Pages.SharedListPage"
+             Style="{StaticResource MainLayout}"
+             x:Name="page"> 
+    
+    <ContentPage.Resources>
+        <toolkit:TabSelectionChangedEventArgs x:Key="ItemSelectedEventArgs" />        
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" 
+                     Command="{Binding BindingContext.OnSaveCommand,Source={x:Reference page}}"
+                     CommandParameter="{Binding .}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                                 Glyph="{x:Static icons:FontAwesomeHelper.FloppyDisk}"/>
+
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               Color="{StaticResource ColorPrimary}"
+                               VerticalOptions="CenterAndExpand"></ActivityIndicator>
+            <ScrollView IsVisible="{Binding ShowContent}">
+                <Grid VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <BoxView Grid.Column="0"
+                             Grid.ColumnSpan="3"
+                             BackgroundColor="#5e6265"></BoxView>
+                    <Label Text="Friends"
+                           Grid.Column="0"                      
+                           VerticalOptions="Center"
+                           Padding="10,0"
+                           ></Label>
+                    <Label Text="Write permission"
+                           Grid.Column="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"></Label>
+                    <Label Text="Share"
+                           Grid.Column="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"></Label>
+                    <ListView ItemsSource="{Binding Friends}" 
+                              Grid.Column="0"
+                              Grid.ColumnSpan="3"
+                              Grid.Row="1">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:SharedListSettings">
+                                <ViewCell>
+                                    <Grid VerticalOptions="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <Label Grid.Column="0"                                  
+                                               Text="{Binding Name}"                                                                                   
+                                               Padding="10,0"
+                                               VerticalOptions="Center"                                           
+                                               TextColor="{StaticResource ColorPrimary}"/>
+                                        <CheckBox Grid.Column="1"                                              
+                                                  VerticalOptions="Center"
+                                                  HorizontalOptions="Center"
+                                                  Color="{StaticResource ColorPrimary}"
+                                                  IsChecked="{Binding WritePermission}"
+                                                  IsEnabled="{Binding IsShared}"
+                                                  >
+                                            <CheckBox.Behaviors>
+                                                <toolkit:EventToCommandBehavior
+                                                    EventName="CheckedChanged"
+                                                    Command="{Binding BindingContext.OnCheckBoxChecked,
+                                                              Source={x:Reference page}}"
+                                                    CommandParameter="{Binding .}"
+                                                    EventArgsConverter="{StaticResource ItemSelectedEventArgs}">
+
+                                                </toolkit:EventToCommandBehavior>
+                                            </CheckBox.Behaviors>
+
+                                        </CheckBox>
+                                        <Switch Grid.Column="2"                                           
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"
+                                                PropertyChanged="Switch_PropertyChanged"                                            
+                                                ThumbColor="{StaticResource ColorDelete}"
+                                                IsToggled="{Binding IsShared}"
+                                            
+                                                >
+                                            <Switch.Behaviors>
+                                                <toolkit:EventToCommandBehavior  
+                                                    EventName="Toggled"
+                                                    Command="{Binding BindingContext.OnSwitchToggle,
+                                                              Source={x:Reference page}}"
+                                                    CommandParameter="{Binding .}"
+                                                    EventArgsConverter="{StaticResource ItemSelectedEventArgs}">
+
+                                                </toolkit:EventToCommandBehavior>
+                                            </Switch.Behaviors>
+                                        </Switch>
+                                    
+                                    </Grid>                                
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

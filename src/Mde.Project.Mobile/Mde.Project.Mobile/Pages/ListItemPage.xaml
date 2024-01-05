@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:Mde.Project.Mobile.Domain.Models"
+             x:Class="Mde.Project.Mobile.Pages.ListItemPage"
+             Style="{StaticResource MainLayout}">
+  <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10,10">
+                <StackLayout>
+                    <Label Text="Name:"
+                           Style="{StaticResource LabelEntry}"></Label>
+                    <Label Text="{Binding Name}"
+                       TextColor="White"></Label>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Description: "
+                   Style="{StaticResource LabelEntry}"></Label>
+                    <Label Text="{Binding Description}"
+                           TextColor="White"></Label>
+                </StackLayout>
+                <Image Source="{Binding ImagePath}"
+                       Aspect="AspectFill"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"></Image>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+ 
+</ContentPage>

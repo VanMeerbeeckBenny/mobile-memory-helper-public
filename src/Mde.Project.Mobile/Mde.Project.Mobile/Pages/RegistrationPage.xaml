@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:icons="clr-namespace:Mde.Project.Mobile.Domain.Helpers"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             x:Class="Mde.Project.Mobile.Pages.RegistrationPage"        
+             Style="{StaticResource MainLayout}">
+    <ContentPage.Content>
+        <StackLayout>       
+            <StackLayout Margin="10,5,0,10">
+                <Label Text="Register"
+                       HorizontalOptions="Center"
+                       FontSize="28"
+                       TextColor="White">               
+                </Label>
+            </StackLayout>
+            <StackLayout Padding="10,0">
+                <Label Text="{Binding FirebaseError}"
+                       IsVisible="{Binding FirebaseErrorVisible}"
+                       Style="{StaticResource LabelError}"></Label>
+                <Label Text="UserName :"
+                       Style="{StaticResource LabelEntry}"/>
+                <Entry Keyboard="Default"
+                       Text="{Binding UserName}"
+                       Placeholder="UserName"
+                       PlaceholderColor="LightGray"
+                       Style="{StaticResource EntryStandard }"/>
+                <Label Text="{Binding UserNameError}"
+                       IsVisible="{Binding UserNameErrorVisible}"
+                       Style="{StaticResource LabelError}"></Label>
+                <Label Text="E-mail :"
+                       Style="{StaticResource LabelEntry}"/>
+                <Entry Keyboard="Email"
+                       Text="{Binding Email}"
+                       Placeholder="example@email.com"
+                       PlaceholderColor="LightGray"
+                       Style="{StaticResource EntryStandard }"/>
+                <Label Text="{Binding EmailError}"
+                       IsVisible="{Binding EmailErrorVisible}"
+                       Style="{StaticResource LabelError}"></Label>
+                <Label Text="Password :"
+                       Style="{StaticResource LabelEntry}"/>
+                <Entry Keyboard="Text"
+                       Text="{Binding Password}"
+                       IsPassword="True"
+                       Style="{StaticResource EntryStandard }"
+                       />
+                <Label Text="{Binding PasswordError}"
+                       IsVisible="{Binding PasswordErrorVisible}"
+                       Style="{StaticResource LabelError}"></Label>
+                <Label Text="Verify Password :"
+                       Style="{StaticResource LabelEntry}"/>
+                <Entry Keyboard="Text"
+                       Text="{Binding VerifyPassword}"
+                       IsPassword="True"
+                       Style="{StaticResource EntryStandard }"/>
+                <Label Text="{Binding VerifyPasswordError}"
+                       IsVisible="{Binding VerifyPasswordErrorVisible}"
+                       Style="{StaticResource LabelError}"></Label>
+                <Button Text="Register"
+                        Style="{StaticResource ButtonPrimary}"
+                        Command="{Binding CreateAccountCommand}"/>
+
+                <Label FontSize="15"
+                       TextColor="LightGray"
+                       HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Have an Account?"></Span>
+                            <Span Text=" Sign in"
+                                  TextColor="Red">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RedirectToLoginCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

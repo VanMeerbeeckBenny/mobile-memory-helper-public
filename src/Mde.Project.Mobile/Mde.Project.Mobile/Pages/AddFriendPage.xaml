@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mde.Project.Mobile.Pages.AddFriendPage"
+             Title="Add Friend"
+             Style="{StaticResource MainLayout}">
+    <ContentPage.Content>
+        <FlexLayout JustifyContent="Center"
+                    Padding="10,0"
+                    Direction="Column">         
+                <Label Text="E-mail : "
+                       Style="{StaticResource LabelEntry}"
+                       HorizontalOptions="StartAndExpand"
+                       HorizontalTextAlignment="Start"
+                     />               
+                <Label Text="{Binding Message}"
+                       Style="{StaticResource LabelError}"
+                       TextColor="{StaticResource ColorSave}"
+                       IsVisible="{Binding MessageIsVisible}"/>
+                <Entry Style="{StaticResource EntryStandard}"
+                       Text="{Binding Email}"
+                       Placeholder="jhonndo@outlook.com"
+                       PlaceholderColor="LightGray"
+                       HorizontalOptions="CenterAndExpand"
+                       Keyboard="Email"></Entry>
+                <Label Text="{Binding Error}"
+                       Style="{StaticResource LabelError}"
+                       IsVisible="{Binding ErrorIsVisible}"/>
+                <Button Text="Send Request"
+                        Style="{StaticResource ButtonPrimary}"
+                        Command="{Binding SendFriendRequestCommand}"></Button>   
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>

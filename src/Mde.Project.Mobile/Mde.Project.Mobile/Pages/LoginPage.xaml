@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:icons="clr-namespace:Mde.Project.Mobile.Domain.Helpers"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             x:Class="Mde.Project.Mobile.Pages.LoginPage"             
+             Style="{StaticResource MainLayout}">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               Color="{StaticResource ColorPrimary}"
+                               VerticalOptions="CenterAndExpand"></ActivityIndicator>
+            <StackLayout IsVisible="{Binding ShowContent}">           
+                <StackLayout Padding="10"
+                             Margin="0,40,0,10">
+                    <Label Text="Sign In"                                  
+                                      FontSize="30"
+                                      TextColor="White" 
+                                      HorizontalOptions="Center"
+                                      />
+                    <Label Text="Hi! Nice to see you."
+                                      FontSize="15"
+                                      TextColor="LightBlue"
+                                      HorizontalOptions="Center"/>
+
+                </StackLayout>
+                <StackLayout Padding="10">
+                    <Label Style="{StaticResource LabelError}"
+                           Text="{Binding FirebaseError}"
+                           IsVisible="{Binding FirebaseErrorVisible}"/>
+                    <Label Text="E-mail :"
+                           Style="{StaticResource LabelEntry}"/>
+                    <Entry Text="{Binding Email}"
+                           Keyboard="Email"
+                           Placeholder="example@email.com"
+                           PlaceholderColor="LightGray"
+                           Style="{StaticResource EntryStandard }"/>
+                    <Label Style="{StaticResource LabelError}"
+                           Text="{Binding EmailError}"
+                           IsVisible="{Binding EmailErrorVisible}"/>
+                    <Label Text="Password :"
+                           Style="{StaticResource LabelEntry}"/>
+                    <Entry Text="{Binding Password}"
+                           Keyboard="Text"
+                           IsPassword="True"
+                           Style="{StaticResource EntryStandard }"
+                           />
+                    <Label Style="{StaticResource LabelError}"
+                           Text="{Binding PasswordError}"
+                           IsVisible="{Binding PasswordErrorVisible}"/>
+                    <Button Text="Sign In"
+                            Style="{StaticResource ButtonPrimary}"
+                            Command="{Binding OnLoginCommand}"/>
+                    <Label FontSize="15"
+                           TextColor="LightGray"
+                           HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Don't have an Account?"></Span>
+                                <Span Text="Register"
+                                      TextColor="Red">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding RedirectToRegistrationCommand}" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>       
+            
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
