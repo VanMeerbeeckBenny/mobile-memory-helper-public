@@ -251,7 +251,7 @@ namespace Mde.Project.Mobile.ViewModels
                     if (userinfo != null) 
                     {
                         var title = "List Update";
-                        var message = $"{userinfo.Name} has update the list {currentList.Name}";
+                        var message = $"{userinfo.Name} has updated the list {currentList.Name}";
                         var topic = currentList.Name.Replace(" ", "");
                         await _pushNotificationService.SendMessage(title, message, topic);
                             }
